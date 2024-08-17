@@ -1,0 +1,25 @@
+name: Download Large File from Google Drive
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Download large file from Google Drive
+      run: |
+        # Install necessary tools
+        sudo apt-get install -y wget
+        
+        # Download the file
+        wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1-BcTizq1MrdfPpkdgWSJ9fjWYwqhM3FT' -O model.safetensors
+        
+        # Optionally, you might need to handle file extraction if it's compressed
+        # For large files, make sure the server has enough space and proper handling
